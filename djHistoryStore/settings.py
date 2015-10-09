@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cadenas',
+    'productos',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,8 +89,9 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+if DEBUG == False:
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
 
 
 # Internationalization
