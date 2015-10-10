@@ -15,14 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from cadenas.viewsets import PlaceViewSet
-from productos.viewsets import CategoryViewSet, ProductViewSet
+from cadenas.viewsets import VendorViewSet, PlaceViewSet
+from productos.viewsets import CategoryViewSet, ProductViewSet, CommentViewSet
+from compras.viewsets import ListViewSet, ShoppingViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
+router.register(r'vendors', VendorViewSet)
 router.register(r'places', PlaceViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'products', ProductViewSet)
+router.register(r'comments', CommentViewSet)
+router.register(r'lists', ListViewSet)
+router.register(r'shoppings', ShoppingViewSet)
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
