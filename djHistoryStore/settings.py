@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -43,9 +43,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'rest_framework',
+    'rest_framework',
     'cadenas',
     'productos',
+    'compras',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,7 +93,8 @@ DATABASES = {
 
 if DEBUG == False:
     import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
+
+    DATABASES['default'] = dj_database_url.config()
 
 
 # Internationalization
@@ -124,10 +126,10 @@ STATICFILES_DIRS = (
 # django rest_framework config
 
 REST_FRAMEWORK = {
-   'DEFAULT_PERMISSION_CLASSES': (
-       'rest_framework.permissions.IsAuthenticated',
-   ),
-   'DEFAULT_AUTHENTICATION_CLASSES': (
-       'rest_framework.authentication.BasicAuthentication',
-   ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
