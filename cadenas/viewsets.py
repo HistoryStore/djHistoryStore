@@ -1,6 +1,3 @@
-__author__ = 'richpolis'
-# To change this template use Tools | Templates.
-
 from .models import Place
 from .serializers import PlaceSerializer
 from rest_framework import viewsets
