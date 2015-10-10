@@ -1,6 +1,11 @@
-from .models import Place
-from .serializers import PlaceSerializer
+from .models import Vendor, Place
+from .serializers import VendorSerializer, PlaceSerializer
 from rest_framework import viewsets
+
+
+class VendorViewSet(viewsets.ModelViewSet):
+    serializer_class = VendorSerializer
+    queryset = Vendor.objects.all()
 
 
 class PlaceViewSet(viewsets.ModelViewSet):
