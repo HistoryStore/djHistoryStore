@@ -8,6 +8,9 @@ class Category(models.Model):
 
 	def __str__(self):
 		self.name
+	
+	def image_url(self):
+		self.image.url
 
 	class Admin:
 		list_display = ('image', 'name',)

@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from cadenas.viewsets import PlaceViewSet
+from productos.viewsets import CategoryViewSet, ProductViewSet
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'places', PlaceViewSet)
+router.register(r'categories', CategoryViewSet)
+router.register(r'products', ProductViewSet)
+
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+	url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 ]

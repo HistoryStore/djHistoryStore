@@ -4,6 +4,9 @@ from django.db import models
 class Place(models.Model):
 	name = models.CharField("nombre", max_length=140)
 	image = models.ImageField("logo", upload_to="lugares/")
+	
+	def image_url(self):
+		self.image.url
 
 	def __str__(self):
 		self.name
