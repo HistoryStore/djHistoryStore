@@ -2,18 +2,25 @@ from django.db import models
 from cadenas.models import Vendor, Place
 from django.contrib.auth.models import User
 from productos.models import Product
+from django.utils import timezone
 
 
 class List(models.Model):
-    date_shopping = models.DateField("fecha", auto_created=True)
+    date_shopping = models.DateField("fecha", null=True, blank=True, editable=False)
     vendor = models.ForeignKey(Vendor, verbose_name="cadena", related_name="vendors", related_query_name="vendor")
     place = models.ForeignKey(Place, verbose_name="lugar", related_name="places", related_query_name="place")
     status = models.BooleanField("status", default=False)
     user = models.ForeignKey(User, verbose_name="usuario")
 
+    def save(self, *args, **kwargs):
+        """ On save, update timestamps """
+        if not self.id:
+            self.date_shopping = timezone.now().date()
+        return super(List, self).save(*args, **kwargs)
+
     @property
     def total(self):
-        shoppigns = self.shopping_set.all()
+        shoppigns = self.shoppings.all()
         dTotal = 0
         for shopping in shoppigns:
             dTotal += shopping.total

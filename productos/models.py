@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -49,12 +50,18 @@ class Comment(models.Model):
     user = models.ForeignKey(User, related_name="comments", related_query_name="comment")
     product = models.ForeignKey(Product, related_name="products", related_query_name="product")
     comment = models.TextField("comentario")
-    created_at = models.DateTimeField("creado", auto_created=True)
+    created_at = models.DateTimeField("creado", null=True, blank=True, editable=False)
     qualification = models.IntegerField("calificacion", default=0)
 
     def __str__(self):
         return "User: {0} Product: {1} Qualification: {2}".format(self.user.get_full_name(), self.product,
                                                                   self.qualification)
+
+    def save(self, *args, **kwargs):
+        """ On save, update timestamps """
+        if not self.id:
+            self.created = timezone.now()
+        return super(Comment, self).save(*args, **kwargs)
 
     class Admin:
         def __init__(self):
