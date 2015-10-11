@@ -20,7 +20,7 @@ class List(models.Model):
 
     @property
     def total(self):
-        shoppigns = self.shopping_set.all()
+        shoppigns = self.shoppings.all()
         dTotal = 0
         for shopping in shoppigns:
             dTotal += shopping.total
