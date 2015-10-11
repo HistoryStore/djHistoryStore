@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class List(models.Model):
-    date_shopping = models.DateField("fecha", null=True, blank=True)
+    date_shopping = models.DateField("fecha", null=True, blank=True, editable=False)
     vendor = models.ForeignKey(Vendor, verbose_name="cadena", related_name="vendors", related_query_name="vendor")
     place = models.ForeignKey(Place, verbose_name="lugar", related_name="places", related_query_name="place")
     status = models.BooleanField("status", default=False)
