@@ -125,6 +125,11 @@ STATICFILES_DIRS = (
 
 # django rest_framework config
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'SEARCH_PARAM': 'q'
+}
+
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': (
 #         'rest_framework.permissions.IsAuthenticated',

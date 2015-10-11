@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from cadenas.viewsets import VendorViewSet, PlaceViewSet
-from productos.viewsets import CategoryViewSet, ProductViewSet, CommentViewSet
+from productos.viewsets import CategoryViewSet, ProductViewSet, CommentViewSet, UserViewSet
 from compras.viewsets import ListViewSet, ShoppingViewSet
 from rest_framework.routers import DefaultRouter
 
@@ -28,6 +28,7 @@ router.register(r'products', ProductViewSet)
 router.register(r'comments', CommentViewSet)
 router.register(r'lists', ListViewSet)
 router.register(r'shoppings', ShoppingViewSet)
+router.register(r'users', UserViewSet)
 
 
 urlpatterns = [
