@@ -18,7 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from cadenas.viewsets import VendorViewSet, PlaceViewSet
 from productos.viewsets import CategoryViewSet, ProductViewSet, CommentViewSet, UserViewSet
-from compras.viewsets import ListViewSet, ShoppingViewSet
+from compras.viewsets import ListViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -28,13 +28,13 @@ router.register(r'categories', CategoryViewSet)
 router.register(r'products', ProductViewSet)
 router.register(r'comments', CommentViewSet)
 router.register(r'lists', ListViewSet)
-router.register(r'shoppings', ShoppingViewSet)
+# router.register(r'shoppings', ShoppingViewSet)
 router.register(r'users', UserViewSet)
-
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
+    url(r'^api/graficos/', include('graficos.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, }),
 ]

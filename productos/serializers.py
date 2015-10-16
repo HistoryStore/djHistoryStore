@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Category, Product, Comment
 from django.contrib.auth.models import User
+from compras.models import List
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -13,10 +14,13 @@ class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     category_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Category.objects.all(),
                                                      source='category')
+    list_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=List.objects.all(),
+                                                 source='list')
 
     class Meta:
         model = Product
-        fields = ('id', 'key', 'name', 'category', 'category_id', 'type_uom', 'conversion',)
+        fields = (
+        'id', 'key', 'name', 'category', 'category_id', 'type_uom', 'conversion', 'price', 'quantity', 'list_id')
 
 
 class UserSerializer(serializers.ModelSerializer):
