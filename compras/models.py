@@ -7,7 +7,7 @@ from django.utils import timezone
 
 class List(models.Model):
     date_shopping = models.DateField("fecha", null=True, blank=True, editable=False)
-    vendor = models.ForeignKey(Vendor, verbose_name="cadena", related_name="vendors", related_query_name="vendor")
+    #  vendor = models.ForeignKey(Vendor, verbose_name="cadena", related_name="vendors", related_query_name="vendor")
     place = models.ForeignKey(Place, verbose_name="lugar", related_name="places", related_query_name="place")
     status = models.BooleanField("status", default=False)
     user = models.ForeignKey(User, verbose_name="usuario")
@@ -31,18 +31,10 @@ class List(models.Model):
 
 
 class Shopping(models.Model):
-    KILOGRAM = "kilogram"
-    LITER = "liter"
-    PIECE = "piece"
-
-    CHOICES_TYPE_UOM = ( (KILOGRAM, "Kilogramo"), (LITER, "Litro"), (PIECE, "Pieza"),)
-
     product = models.ForeignKey(Product, verbose_name="producto", related_name="shoppings",
                                 related_query_name="shopping")
     list = models.ForeignKey(List, verbose_name="lista", related_name="shoppings", related_query_name='shopping')
-    type_uom = models.CharField("tipo uom", max_length=10, choices=CHOICES_TYPE_UOM, default=KILOGRAM)
     price = models.DecimalField("precio", max_digits=6, decimal_places=2)
-    conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3)
     quantity = models.IntegerField("cantidad", default=1)
 
     @property

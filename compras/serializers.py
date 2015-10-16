@@ -9,14 +9,14 @@ from cadenas.models import Place, Vendor
 class ListSerializer(serializers.ModelSerializer):
     place = PlaceSerializer(read_only=True)
     place_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Place.objects.all(), source='place')
-    vendor = VendorSerializer(read_only=True)
-    vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
+    # vendor = VendorSerializer(read_only=True)
+    # vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
     user = UserSerializer(read_only=True)
     user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
 
     class Meta:
         model = List
-        fields = ('id', 'date_shopping', 'place', 'place_id', 'vendor', 'vendor_id', 'status', 'user','user_id', 'total',)
+        fields = ('id', 'date_shopping', 'place', 'place_id', 'status', 'user','user_id', 'total',)
         read_only_fields = ('date_shopping',)
 
 
@@ -28,4 +28,4 @@ class ShoppingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shopping
-        fields = ('id', 'product','product_id', 'list','list_id', 'type_uom', 'price', 'conversion', 'quantity', 'total',)
+        fields = ('id', 'product','product_id', 'list','list_id',  'price', 'quantity', 'total',)

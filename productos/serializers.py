@@ -11,11 +11,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
-    category_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Category.objects.all(), source='category')
+    category_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Category.objects.all(),
+                                                     source='category')
 
     class Meta:
         model = Product
-        fields = ('id', 'key', 'name', 'category', 'category_id',)
+        fields = ('id', 'key', 'name', 'category', 'category_id', 'type_uom', 'conversion',)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -32,7 +33,5 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('id', 'user', 'user_id', 'product', 'product_id', 'comment', 'qualification','created_at')
+        fields = ('id', 'user', 'user_id', 'product', 'product_id', 'comment', 'qualification', 'created_at')
         read_only_fields = ('created_at',)
-
-

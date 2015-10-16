@@ -27,9 +27,17 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    KILOGRAM = "kilogram"
+    LITER = "liter"
+    PIECE = "piece"
+
+    CHOICES_TYPE_UOM = ( (KILOGRAM, "Kilogramo"), (LITER, "Litro"), (PIECE, "Pieza"),)
+
     key = models.CharField("codigo", max_length=140, null=True, blank=True)
     name = models.CharField("nombre", max_length=140)
     category = models.ForeignKey(Category, verbose_name='categoria')
+    type_uom = models.CharField("tipo uom", max_length=10, choices=CHOICES_TYPE_UOM, default=KILOGRAM)
+    conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3, default=0)
 
     def __str__(self):
         return self.name
