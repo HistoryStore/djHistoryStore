@@ -26,7 +26,8 @@ class Vendor(models.Model):
 
 class Place(models.Model):
     name = models.CharField("nombre", max_length=140)
-    image = models.ImageField("logo", upload_to="places/")
+    #  image = models.ImageField("logo", upload_to="places/")
+    vendor = models.ForeignKey(Vendor, verbose_name="vendor", related_query_name="vendor", null=True, blank=True)
     latitude = models.CharField("latitude", max_length="50", null=True, blank=True)
     longitude = models.CharField("longitude", max_length="50", null=True, blank=True)
 
@@ -44,6 +45,6 @@ class Place(models.Model):
         def __init__(self):
             pass
 
-        list_display = ('image_view', 'name','latitude', 'longitude',)
+        list_display = ('name','latitude', 'longitude',)
         ordering = ('name',)
         search_fields = ('name','latitude', 'longitude',)
