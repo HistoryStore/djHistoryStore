@@ -1,0 +1,1 @@
+djangoKey = 'eerk($9slythjb$y^1sg1ecmnf-_w7jh#+42=&p@as=le5#*ng'
