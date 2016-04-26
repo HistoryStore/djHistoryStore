@@ -28,8 +28,8 @@ class Place(models.Model):
     name = models.CharField("nombre", max_length=140)
     #  image = models.ImageField("logo", upload_to="places/")
     vendor = models.ForeignKey(Vendor, verbose_name="vendor", related_query_name="vendor", null=True, blank=True)
-    latitude = models.CharField("latitude", max_length="50", null=True, blank=True)
-    longitude = models.CharField("longitude", max_length="50", null=True, blank=True)
+    latitude = models.CharField("latitude", max_length=50, null=True, blank=True)
+    longitude = models.CharField("longitude", max_length=50, null=True, blank=True)
 
     def image_view(self):
         return """
