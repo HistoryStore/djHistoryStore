@@ -2,3 +2,5 @@
 *.pyc
 staticfiles
 .idea
+
+/venv
