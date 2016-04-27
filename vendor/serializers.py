@@ -23,7 +23,7 @@ class VendorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'image', 'places', 'categories']
 
 class PlaceSerializer(serializers.ModelSerializer):
-    vendor = VendorSerializer(many=False, read_only=True)
+    vendor = DefaultVendorSerializer(many=False, read_only=True)
 
     vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
 
