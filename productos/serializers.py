@@ -16,13 +16,16 @@ class DefaultCategorySerializer(serializers.ModelSerializer):
 class DefaultProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'key', 'name', 'type_uom', 'conversion']
+        fields = ['id', 'code', 'name', 'type_uom', 'conversion']
 
 # ----------Serializers with attributes and relations----------#
 class CategorySerializer(serializers.ModelSerializer):
+
+    products = DefaultProductSerializer(many=True, read_only=True)
+
     class Meta:
         model = Category
-        fields = ['id', 'name', 'image',]
+        fields = ['id', 'name', 'image', 'products']
 
 class ProductSerializer(serializers.ModelSerializer):
 
@@ -32,7 +35,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'key', 'name', 'category', 'category_id', 'type_uom', 'conversion')
+        fields = ('id', 'code', 'name', 'category', 'category_id', 'type_uom', 'conversion')
 
 class CommentSerializer(serializers.ModelSerializer):
     user = DefaultUserSerializer(read_only=True)

@@ -13,7 +13,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
+    serializer_class = DefaultUserSerializer
     queryset = User.objects.all()
 
 

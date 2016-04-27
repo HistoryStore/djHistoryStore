@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import List
-from productos.serializers import ProductSerializer, UserSerializer
-from productos.models import Category, Product, User
-from cadenas.serializers import PlaceSerializer, VendorSerializer
-from cadenas.models import Place, Vendor
+from productos.serializers import *
+from productos.models import *
+from cadenas.serializers import *
+from cadenas.models import *
 
 
 class ListSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class ListSerializer(serializers.ModelSerializer):
     place_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Place.objects.all(), source='place')
     # vendor = VendorSerializer(read_only=True)
     # vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
-    user = UserSerializer(read_only=True)
+    user = DefaultUserSerializer(read_only=True)
     user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
 
     products = ProductSerializer(Product.objects.all(), many=True, read_only=True)
