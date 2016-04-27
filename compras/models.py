@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from productos.models import Product
+from vendor.models import Place
 
 class List(models.Model):
 
@@ -11,6 +12,7 @@ class List(models.Model):
 
     #Relations
     user = models.ForeignKey(User, verbose_name="usuario")
+    place = models.ForeignKey(Place, related_name='lists')
     products = models.ManyToManyField(Product, related_name='lists')
 
     #Attributes
