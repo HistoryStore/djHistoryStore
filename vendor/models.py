@@ -31,6 +31,7 @@ class Place(models.Model):
 
     # Relations
     vendor = models.ForeignKey(Vendor, related_name='places', blank=False)
+
     # Attributes
     address = models.CharField(max_length=150, blank=False)
     latitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, default=0.000)
