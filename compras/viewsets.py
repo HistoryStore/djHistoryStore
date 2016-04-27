@@ -7,8 +7,8 @@ class ListViewSet(viewsets.ModelViewSet):
     serializer_class = ListSerializer
     queryset = List.objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('user__email', 'place__name',)
-    search_fields = ('place__name',  'user__email',)
+    filter_fields = ('user__email',)
+    search_fields = ('user__email',)
 
 
 # class ShoppingViewSet(viewsets.ModelViewSet):

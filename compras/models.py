@@ -1,15 +1,21 @@
 from django.db import models
-from cadenas.models import Place
-from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.contrib.auth.models import User
+from productos.models import Product
 
 class List(models.Model):
-    date_shopping = models.DateField("fecha", null=True, blank=True, editable=False)
-    #  vendor = models.ForeignKey(Vendor, verbose_name="cadena", related_name="vendors", related_query_name="vendor")
-    place = models.ForeignKey(Place, verbose_name="lugar", related_name="places", related_query_name="place")
-    status = models.BooleanField("status", default=False)
+
+    class Meta:
+        verbose_name = 'List'
+        verbose_name_plural = 'Lists'
+
+    #Relations
     user = models.ForeignKey(User, verbose_name="usuario")
+    products = models.ManyToManyField(Product, related_name='lists')
+
+    #Attributes
+    date_shopping = models.DateField("fecha", auto_now=True)
+    status = models.BooleanField("status", default=False)
 
     def save(self, *args, **kwargs):
         """ On save, update timestamps """
@@ -17,16 +23,16 @@ class List(models.Model):
             self.date_shopping = timezone.now().date()
         return super(List, self).save(*args, **kwargs)
 
-    @property
-    def total(self):
-        products = self.products.all()
-        dTotal = 0
-        for product in products:
-            dTotal += product.total
-        return dTotal
+    # @property
+    # def total(self):
+    #     products = self.products.all()
+    #     dTotal = 0
+    #     for product in products:
+    #         dTotal += product.total
+    #     return dTotal
 
     def __str__(self):
-        return "{0} {1} {2}".format(self.date_shopping, self.place.name, self.total)
+        return "{0} {1}".format(self.date_shopping, self.user.username)
 
 
 # class Shopping(models.Model):

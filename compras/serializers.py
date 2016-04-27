@@ -2,23 +2,23 @@ from rest_framework import serializers
 from .models import List
 from productos.serializers import *
 from productos.models import *
-from cadenas.serializers import *
-from cadenas.models import *
 
+
+class DefaultListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = List
+        fields = ['id', 'date_shopping', 'status']
 
 class ListSerializer(serializers.ModelSerializer):
-    place = PlaceSerializer(read_only=True)
-    place_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Place.objects.all(), source='place')
-    # vendor = VendorSerializer(read_only=True)
-    # vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
     user = DefaultUserSerializer(read_only=True)
+
     user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
 
-    products = ProductSerializer(Product.objects.all(), many=True, read_only=True)
+    products = DefaultProductSerializer(many=True, required=False)
 
     class Meta:
         model = List
-        fields = ('id', 'date_shopping', 'place', 'place_id', 'status', 'user','user_id', 'products', 'total',)
+        fields = ('id', 'date_shopping', 'status', 'user','user_id', 'products', )
         read_only_fields = ('date_shopping',)
 
 
