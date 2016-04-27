@@ -16,14 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.conf import settings
 from django.contrib import admin
-from cadenas.viewsets import VendorViewSet, PlaceViewSet
+# from cadenas.viewsets import VendorViewSet, PlaceViewSet
 from productos.viewsets import CategoryViewSet, ProductViewSet, CommentViewSet, UserViewSet
 from compras.viewsets import ListViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'vendors', VendorViewSet)
-router.register(r'places', PlaceViewSet)
+# router.register(r'vendors', VendorViewSet)
+# router.register(r'places', PlaceViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'products', ProductViewSet)
 router.register(r'comments', CommentViewSet)
