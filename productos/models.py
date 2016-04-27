@@ -8,14 +8,6 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-    class Admin:
-        def __init__(self):
-            pass
-
-        list_display = ('image_view', 'name',)
-        ordering = ('name',)
-        search_fields = ('name',)
-
     #Relations
 
     #Attributes
