@@ -1,8 +1,8 @@
 from django.db import models
-from cadenas.models import Place
-from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.contrib.auth.models import User
+from cadenas.models import Place
+from productos.models import Product
 
 class List(models.Model):
 
@@ -13,6 +13,7 @@ class List(models.Model):
     #Relations
     place = models.ForeignKey(Place, verbose_name="lugar", related_name="places", related_query_name="place")
     user = models.ForeignKey(User, verbose_name="usuario")
+    products = models.ManyToManyField(Product, related_name='lists')
 
     #Attributes
     date_shopping = models.DateField("fecha", auto_now=True)
