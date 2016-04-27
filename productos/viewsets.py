@@ -1,6 +1,4 @@
-from .models import Category, Product, Comment
-from django.contrib.auth.models import User
-from .serializers import CategorySerializer, ProductSerializer, CommentSerializer, UserSerializer
+from .serializers import *
 from rest_framework import viewsets, filters
 
 

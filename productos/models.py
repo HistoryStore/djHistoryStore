@@ -61,7 +61,7 @@ class Product(models.Model):
     code = models.CharField("codigo", max_length=140, null=True, blank=True)
     name = models.CharField("nombre", max_length=140, blank=False)
     type_uom = models.CharField("tipo uom", max_length=10, choices=CHOICES_TYPE_UOM, default=KILOGRAM, blank=False)
-    # conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3, default=0, blank=False)
+    conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3, default=0, blank=False)
     # price = models.DecimalField("precio", max_digits=6, decimal_places=2, default=0, blank=False)
     # quantity = models.IntegerField("cantidad", default=0, blank=False)
 
