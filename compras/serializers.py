@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from .models import List
 from productos.serializers import *
-from productos.models import *
-
+from vendor.serializers import *
 
 class DefaultListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,14 +10,15 @@ class DefaultListSerializer(serializers.ModelSerializer):
 
 class ListSerializer(serializers.ModelSerializer):
     user = DefaultUserSerializer(read_only=True)
+    products = DefaultProductSerializer(many=True, required=False)
+    place = PlaceSerializer(many=False, read_only=True)
 
     user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
-
-    products = DefaultProductSerializer(many=True, required=False)
+    place_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Place.objects.all(), source='place')
 
     class Meta:
         model = List
-        fields = ('id', 'date_shopping', 'status', 'user','user_id', 'products', )
+        fields = ('id', 'date_shopping', 'status', 'user','user_id', 'place', 'place_id', 'products', )
         read_only_fields = ('date_shopping',)
 
 

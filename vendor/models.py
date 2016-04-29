@@ -36,3 +36,6 @@ class Place(models.Model):
     address = models.CharField(max_length=150, blank=False)
     latitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, default=0.000)
     longitude = models.DecimalField(max_digits=11, decimal_places=8, blank=True, default=0.000)
+
+    def __str__(self):
+        return '{0} {1}'.format(self.vendor, self.address)
