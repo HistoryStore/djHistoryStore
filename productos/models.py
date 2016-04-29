@@ -12,31 +12,16 @@ class Category(models.Model):
 
     #Attributes
     name = models.CharField("categoria", max_length=140)
-    image = models.ImageField("imagen", upload_to="categories/")
 
     def __str__(self):
         return self.name
 
-    def image_view(self):
-        return """
-        <img src="%s" style="max-width: 120px; max-height: 120px;" />
-        """ % self.image.url
-
-    image_view.allow_tags = True
 
 class Product(models.Model):
 
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-
-    class Admin:
-        def __init__(self):
-            pass
-
-        list_display = ('code', 'image_view', 'name', 'category',)
-        ordering = ('category', 'name',)
-        search_fields = ('name', 'category__name',)
 
     KILOGRAM = "kilogram"
     LITER = "liter"
@@ -53,7 +38,8 @@ class Product(models.Model):
     name = models.CharField("nombre", max_length=140, blank=False)
     type_uom = models.CharField("tipo uom", max_length=10, choices=CHOICES_TYPE_UOM, default=KILOGRAM, blank=False)
     conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3, default=0, blank=False)
-    # price = models.DecimalField("precio", max_digits=6, decimal_places=2, default=0, blank=False)
+    image = models.ImageField("imagen", upload_to="categories/")
+    price = models.DecimalField("precio", max_digits=6, decimal_places=2, default=0, blank=False)
     # quantity = models.IntegerField("cantidad", default=0, blank=False)
 
     @property
@@ -72,14 +58,15 @@ class Product(models.Model):
         valor = self.conversion if self.conversion > 0 else self.conversion * 1000
         return "{0}{1}".format(valor, self.get_abr_type_uom())
 
-    # def __str__(self):
-    #     return "{0} {1} {3}".format(self.product.name, self.get_conversion_type_uom(), self.quantity)
-
     def __str__(self):
         return self.name
 
     def image_view(self):
-        return self.category.image_view()
+        return """
+        <img src="%s" style="max-width: 120px; max-height: 120px;" />
+        """ % self.image.url
+
+    image_view.allow_tags = True
 
 class Comment(models.Model):
 
