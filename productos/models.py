@@ -38,7 +38,7 @@ class Product(models.Model):
     name = models.CharField("nombre", max_length=140, blank=False)
     type_uom = models.CharField("tipo uom", max_length=10, choices=CHOICES_TYPE_UOM, default=KILOGRAM, blank=False)
     conversion = models.DecimalField("conversion", max_digits=6, decimal_places=3, default=0, blank=False)
-    image = models.ImageField("imagen", upload_to="categories/", default='media/categories/YANA-Background.png')
+    image = models.ImageField("imagen", upload_to="products/", default='media/categories/YANA-Background.png')
     price = models.DecimalField("precio", max_digits=6, decimal_places=2, default=0, blank=False)
     # quantity = models.IntegerField("cantidad", default=0, blank=False)
 
