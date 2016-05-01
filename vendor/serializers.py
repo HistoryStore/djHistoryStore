@@ -25,8 +25,6 @@ class VendorSerializer(serializers.ModelSerializer):
 class PlaceSerializer(serializers.ModelSerializer):
     vendor = DefaultVendorSerializer(many=False, read_only=True)
 
-    vendor_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Vendor.objects.all(), source='vendor')
-
     class Meta:
         model = Place
-        fields = ['id', 'address', 'latitude', 'longitude', 'vendor', 'vendor_id']
+        fields = ['id', 'address', 'latitude', 'longitude', 'vendor']

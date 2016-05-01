@@ -9,16 +9,14 @@ class DefaultListSerializer(serializers.ModelSerializer):
         fields = ['id', 'date_shopping', 'status']
 
 class ListSerializer(serializers.ModelSerializer):
-    user = DefaultUserSerializer(read_only=True)
+    user = DefaultUserSerializer(many=False)
     products = DefaultProductSerializer(many=True, required=False)
-    place = PlaceSerializer(many=False, read_only=True)
+    place = PlaceSerializer(many=False)
 
-    user_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='user')
-    place_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Place.objects.all(), source='place')
 
     class Meta:
         model = List
-        fields = ('id', 'date_shopping', 'status', 'user','user_id', 'place', 'place_id', 'products', )
+        fields = ('id', 'date_shopping', 'status', 'user', 'place', 'products', )
         read_only_fields = ('date_shopping',)
 
 
