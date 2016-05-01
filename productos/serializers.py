@@ -34,6 +34,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('id', 'code', 'name', 'image', 'category', 'type_uom', 'conversion')
+        read_only_fields = ['image']
 
 class CommentSerializer(serializers.ModelSerializer):
     user = DefaultUserSerializer(many=False)
